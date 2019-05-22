@@ -3,8 +3,8 @@
  */
 typedef struct sk {
 	char key[21];
-	int firstRecord;
-	int lastRecord;
+	long int firstRecord;
+	long int lastRecord;
 	bool isDeleted;
 } SKRecord;
 

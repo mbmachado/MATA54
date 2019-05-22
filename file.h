@@ -4,7 +4,7 @@
 typedef struct record {
 	char key[21];
 	char content[51];
-	int next;
+	long int next;
 } Record;
 
 /**
@@ -14,19 +14,19 @@ typedef struct record {
  * @return int insertionLine
  *
  */
-int insertRecordInPrimaryFile(char key[21], char content[51]);
+long int insertRecordInPrimaryFile(char key[21], char content[51]);
 
 /**
  * Updates a record's next poiter in primary file
- * @param int lastRecordLine
+ * @param int lastRecordPosition
  * @param int newNextValue
  *
  */
-void updatePointerInPrimaryFile(int lastRecordLine, int newNextValue);
+void updatePointerInPrimaryFile(long int lastRecordPosition, long int newNextValue);
 
 /**
  * Follows the chain and prints all record found in primary file
- * @param int firstRecordLine
+ * @param int firstRecordPosition
  *
  */
-void consultRecordsInPrimaryFile(int firstRecordLine);
+void consultRecordsInPrimaryFile(long int firstRecordPosition);
