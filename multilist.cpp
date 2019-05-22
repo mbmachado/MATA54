@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include "multilist.h"
+#include "file.h"
 
 void insert() {
 	bool keyExists = false;
-	char[21] key;
-	char[51] content;
+	char key[21];
+	char content[51];
 	SKRecord newRecord;
 	SKRecord oldRecord;
 	FILE *multilist;
@@ -35,7 +36,7 @@ void insert() {
 	} else {
 		int line =  insertRecordInPrimaryFile(key, content);
 
-		newRecord.key = key;
+		newRecord.key[21] = key[21];
 		newRecord.firstRecord = line;
 	 	newRecord.lastRecord = line;
 	 	newRecord.isDeleted = false;		
@@ -49,7 +50,7 @@ void insert() {
 void remove() {
 	bool keyExists = false;
 	SKRecord record;
-	char[21] key;
+	char key[21];
 	FILE *multilist;
 
 	scanf(" %[^\n]s", key);
@@ -76,10 +77,10 @@ void remove() {
 void consult() {
 	bool keyExists = false;
 	SKRecord record;
-	char[21] key;
+	char key[21];
 	FILE *multilist;
 
-	scanf("%i", &key);
+	scanf(" %[^\n]s", key);
 
 	multilist = fopen("multilist.txt", "rb");
 	fseek(multilist, 0 * sizeof(SKRecord), SEEK_SET);
