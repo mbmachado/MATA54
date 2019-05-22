@@ -39,6 +39,7 @@ void consultRecordsInPrimaryFile(long int firstRecordPosition) {
 
 	do {
 		fread(&record, sizeof(SKRecord), 1, multilist);
+		fseek(file, record.next, SEEK_SET);
 		printf("chave: %s | conteúdo: %s\n", record.key, record.content);
 	} while(record.next != -1);
 
