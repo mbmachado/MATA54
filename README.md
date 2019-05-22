@@ -30,4 +30,4 @@ a letra ’e’.
 *Importante*: o programa não deve gerar nenhum caractere a mais na saída, além dos indicados acima. Em particular, o programa não deve conter menus.
 
 
-Não deve haver espaço entre linhas na saída. A saída deve apresentar os caracteres em letras minúsculas.
+Não deve haver espaço entre linhas na saída. A saída deve apresentar os caracteres em letras minúsculas. 

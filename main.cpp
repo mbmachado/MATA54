@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "file.h"
+#include "multilist.h"
 
 int main(int argc, char const *argv[]) {
     char command;
@@ -15,9 +15,6 @@ int main(int argc, char const *argv[]) {
                 break;
             case 'r':
                 remove();
-                break;
-            case 'p':
-                printAll();
                 break;
             default:
                 return 0;
