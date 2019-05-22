@@ -22,25 +22,27 @@ void updatePointerInPrimaryFile(long int lastRecordPosition, long int newNextVal
 	FILE *file;
 	Record record;
 
+	file = fopen("file.txt", "r+b");
 	fseek(file, lastRecordPosition, SEEK_SET);
 	fread(&record, sizeof(SKRecord), 1, file);
 
 	record.next = newNextValue;
 
 	fwrite(&record, sizeof(SKRecord), 1, file);
+	fclose(file);
 }
 
 void consultRecordsInPrimaryFile(long int firstRecordPosition) {
 	Record record;
 	FILE *file;
 
-	file = fopen("file.txt", "a+b");
+	file = fopen("file.txt", "rb");
 	fseek(file, firstRecordPosition, SEEK_SET);
 
 	do {
 		fread(&record, sizeof(SKRecord), 1, multilist);
 		fseek(file, record.next, SEEK_SET);
-		printf("chave: %s | conteúdo: %s\n", record.key, record.content);
+		printf("%s %s\n", record.key, record.content);
 	} while(record.next != -1);
 
 	fclose(file);
