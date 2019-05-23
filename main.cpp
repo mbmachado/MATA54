@@ -4,8 +4,7 @@
 int main(int argc, char const *argv[]) {
     char command;
 
-    do {
-        scanf("%c", &command);
+    while(scanf(" %c", &command)) {
         switch(command) {
             case 'i':
                 insert();
@@ -19,6 +18,5 @@ int main(int argc, char const *argv[]) {
             default:
                 return 0;
         }
-    } while(scanf("%c", &command));
-
+    }
 }
