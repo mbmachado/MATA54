@@ -32,16 +32,16 @@ void insert() {
 		// Atualizar valor de lastRecord do registro em multilist //
 		oldRecord.lastRecord = position;
 		fseek(multilist, ftell(multilist) - sizeof(SKRecord), SEEK_SET);
-		fwrite(&oldRecord, sizeof(SKRecord), 1, multilist); 
+		fwrite(&oldRecord, sizeof(SKRecord), 1, multilist);
 	} else {
 		long position = insertRecordIntoPrimaryFile(newRecord.key, content);
 
 		newRecord.firstRecord = position;
 	 	newRecord.lastRecord = position;
-	 	newRecord.isDeleted = 0;		
+	 	newRecord.isDeleted = 0;
 
 	 	fseek(multilist, 0, SEEK_END);
-		fwrite(&newRecord, sizeof(SKRecord), 1, multilist); 
+		fwrite(&newRecord, sizeof(SKRecord), 1, multilist);
 	}
 
 	fclose(multilist);
@@ -68,10 +68,10 @@ void remove() {
 	if(keyExists) {
 		record.isDeleted = 1;
 		fseek(multilist, ftell(multilist) - sizeof(SKRecord), SEEK_SET);
-		fwrite(&record, sizeof(SKRecord), 1, multilist); 
+		fwrite(&record, sizeof(SKRecord), 1, multilist);
 	}
-	
-	fclose(multilist);	
+
+	fclose(multilist);
 }
 
 void consult() {
@@ -85,15 +85,15 @@ void consult() {
 	multilist = fopen("multilist.txt", "rb");
 	fseek(multilist, 0, SEEK_SET);
 
-	while(fread(&record, sizeof(SKRecord), 1, multilist)) { 
+	while(fread(&record, sizeof(SKRecord), 1, multilist)) {
 		if(strncmp(record.key, key, 20) == 0 && record.isDeleted == 0) {
 			keyExists = true;
 			break;
-		}	
+		}
 	}
 
-	fclose(multilist);	
-	
+	fclose(multilist);
+
 	if(keyExists) {
 		consultRecordsFromPrimaryFile(record.firstRecord);
 	}

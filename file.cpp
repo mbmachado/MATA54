@@ -12,7 +12,7 @@ long insertRecordIntoPrimaryFile(char key[21], char content[51]) {
 	record.next = -1;
 
 	file = fopen("file.txt", "a+b");
-	fwrite(&record, sizeof(Record), 1, file); 
+	fwrite(&record, sizeof(Record), 1, file);
 	position = ftell(file) - sizeof(Record);
 	fclose(file);
 
@@ -50,7 +50,7 @@ void consultRecordsFromPrimaryFile(long firstRecordPosition) {
 		}
 
 		fseek(file, record.next, SEEK_SET);
-	} 
+	}
 
 	fclose(file);
 }
