@@ -8,7 +8,7 @@ typedef struct record {
 } Record;
 
 /**
- * Inserts a record in primary file
+ * Inserts a record into the primary file
  * @param char[21] key
  * @param char[51] content
  * @return long insertionPosition
@@ -17,7 +17,7 @@ typedef struct record {
 long insertRecordInPrimaryFile(char key[21], char content[51]);
 
 /**
- * Updates a record's next poiter in primary file
+ * Updates a record's next poiter in the primary file
  * @param long lastRecordPosition
  * @param long newNextValue
  *
@@ -25,7 +25,7 @@ long insertRecordInPrimaryFile(char key[21], char content[51]);
 void updatePointerInPrimaryFile(long lastRecordPosition, long newNextValue);
 
 /**
- * Follows the chain and prints all record found in primary file
+ * Follows the chain and prints all records found in the primary file
  * @param long firstRecordPosition
  *
  */

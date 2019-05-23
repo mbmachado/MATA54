@@ -9,19 +9,19 @@ typedef struct sk {
 } SKRecord;
 
 /**
- * Inserts a secondary key record in multilist file
+ * Inserts a secondary key record into multilist file
  *
  */
 void insert();
 
 /**
- * Removes a secondary key record in multilist file
+ * Removes a secondary key record from multilist file
  *
  */
 void remove();
 
 /**
- * Consults a secondary key record in multilist file
+ * Consults a secondary key record from multilist file
  *
  */
 void consult();
