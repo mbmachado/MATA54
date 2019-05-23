@@ -17,7 +17,7 @@ typedef struct record {
 long insertRecord(char key[21], char content[51]);
 
 /**
- * Updates a record's next poiter in primary file
+ * Updates a record's next pointer in primary file
  * @param long lastRecordPosition
  * @param long newNextValue
  *
