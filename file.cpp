@@ -2,7 +2,7 @@
 #include <string.h>
 #include "file.h"
 
-long insertRecordIntoPrimaryFile(char key[21], char content[51]) {
+long insertRecord(char key[21], char content[51]) {
 	long position;
 	Record record;
 	FILE *file;
@@ -19,7 +19,7 @@ long insertRecordIntoPrimaryFile(char key[21], char content[51]) {
 	return position;
 }
 
-void updatePointerInPrimaryFile(long lastRecordPosition, long newNextValue) {
+void updatePointer(long lastRecordPosition, long newNextValue) {
 	FILE *file;
 	Record record;
 
@@ -34,7 +34,7 @@ void updatePointerInPrimaryFile(long lastRecordPosition, long newNextValue) {
 	fclose(file);
 }
 
-void consultRecordsFromPrimaryFile(long firstRecordPosition) {
+void consultRecords(long firstRecordPosition) {
 	Record record;
 	FILE *file;
 
