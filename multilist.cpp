@@ -13,7 +13,7 @@ void insert() {
 	scanf("%s", newRecord.key);
 	scanf("%s", content);
 
-	multilist = fopen("multilist.txt", "a+b");
+	multilist = fopen("multilist.txt", "r+b");
 	fseek(multilist, 0, SEEK_SET);
 
 	while(fread(&oldRecord, sizeof(SKRecord), 1, multilist)) {
@@ -40,6 +40,7 @@ void insert() {
 	 	newRecord.lastRecord = position;
 	 	newRecord.isDeleted = 0;		
 
+	 	fseek(multilist, 0, SEEK_END);
 		fwrite(&newRecord, sizeof(SKRecord), 1, multilist); 
 	}
 
@@ -52,7 +53,7 @@ void remove() {
 	char key[21];
 	FILE *multilist;
 
-	scanf(" %[^\n]s", key);
+	scanf("%s", key);
 
 	multilist = fopen("multilist.txt", "r+b");
 	fseek(multilist, 0, SEEK_SET);

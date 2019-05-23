@@ -8,7 +8,7 @@ long insertRecordInPrimaryFile(char key[21], char content[51]) {
 	FILE *file;
 
 	strncpy(record.key, key, 21);
-	strncpy(record.content, content, 21);
+	strncpy(record.content, content, 51);
 	record.next = -1;
 
 	file = fopen("file.txt", "a+b");
@@ -29,6 +29,7 @@ void updatePointerInPrimaryFile(long lastRecordPosition, long newNextValue) {
 
 	record.next = newNextValue;
 
+	fseek(file, lastRecordPosition, SEEK_SET);
 	fwrite(&record, sizeof(Record), 1, file);
 	fclose(file);
 }
@@ -42,12 +43,12 @@ void consultRecordsInPrimaryFile(long firstRecordPosition) {
 
 	while(true) {
 		fread(&record, sizeof(Record), 1, file);
-		printf("%s %s\n", record.key, record.content);
+		printf("%s %s %li\n", record.key, record.content, record.next);
 		
 		if (record.next == -1) {
 			break;
 		}
-		
+
 		fseek(file, record.next, SEEK_SET);
 	} 
 
