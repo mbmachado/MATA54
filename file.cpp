@@ -43,8 +43,8 @@ void consultRecordsFromPrimaryFile(long firstRecordPosition) {
 
 	while(true) {
 		fread(&record, sizeof(Record), 1, file);
-		printf("%s %s %li\n", record.key, record.content, record.next);
-		
+		printf("%s %s\n", record.key, record.content);
+
 		if (record.next == -1) {
 			break;
 		}
