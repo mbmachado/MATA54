@@ -4,29 +4,29 @@
 typedef struct record {
 	char key[21];
 	char content[51];
-	long int next;
+	long next;
 } Record;
 
 /**
  * Inserts a record in primary file
  * @param char[21] key
  * @param char[51] content
- * @return long int insertionPosition
+ * @return long insertionPosition
  *
  */
-long int insertRecordInPrimaryFile(char key[21], char content[51]);
+long insertRecordInPrimaryFile(char key[21], char content[51]);
 
 /**
  * Updates a record's next poiter in primary file
- * @param long int lastRecordPosition
- * @param long int newNextValue
+ * @param long lastRecordPosition
+ * @param long newNextValue
  *
  */
-void updatePointerInPrimaryFile(long int lastRecordPosition, long int newNextValue);
+void updatePointerInPrimaryFile(long lastRecordPosition, long newNextValue);
 
 /**
  * Follows the chain and prints all record found in primary file
- * @param int firstRecordPosition
+ * @param long firstRecordPosition
  *
  */
-void consultRecordsInPrimaryFile(long int firstRecordPosition);
+void consultRecordsInPrimaryFile(long firstRecordPosition);

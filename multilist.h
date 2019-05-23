@@ -3,9 +3,9 @@
  */
 typedef struct sk {
 	char key[21];
-	long int firstRecord;
-	long int lastRecord;
-	bool isDeleted;
+	long firstRecord;
+	long lastRecord;
+	short isDeleted;
 } SKRecord;
 
 /**
