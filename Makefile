@@ -6,5 +6,5 @@ faker:
 	python3.6 input-generator.py;
 	./a.out < in
 clear:
-	rm file.txt multilist.txt rm in;
+	rm file.txt multilist.txt in;
 	touch file.txt multilist.txt;
