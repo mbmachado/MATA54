@@ -24,7 +24,7 @@ void insert() {
 	}
 
 	if(keyExists) {
-		long position = insertRecordInPrimaryFile(newRecord.key, content);
+		long position = insertRecordIntoPrimaryFile(newRecord.key, content);
 
 		// Atualizar apontador do ex-último registro em primary file //
 		updatePointerInPrimaryFile(oldRecord.lastRecord, position);
@@ -34,7 +34,7 @@ void insert() {
 		fseek(multilist, ftell(multilist) - sizeof(SKRecord), SEEK_SET);
 		fwrite(&oldRecord, sizeof(SKRecord), 1, multilist); 
 	} else {
-		long position = insertRecordInPrimaryFile(newRecord.key, content);
+		long position = insertRecordIntoPrimaryFile(newRecord.key, content);
 
 		newRecord.firstRecord = position;
 	 	newRecord.lastRecord = position;
@@ -95,6 +95,6 @@ void consult() {
 	fclose(multilist);	
 	
 	if(keyExists) {
-		consultRecordsInPrimaryFile(record.firstRecord);
+		consultRecordsFromPrimaryFile(record.firstRecord);
 	}
 }

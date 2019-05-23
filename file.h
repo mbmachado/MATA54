@@ -14,10 +14,10 @@ typedef struct record {
  * @return long insertionPosition
  *
  */
-long insertRecordInPrimaryFile(char key[21], char content[51]);
+long insertRecordIntoPrimaryFile(char key[21], char content[51]);
 
 /**
- * Updates a record's next poiter in the primary file
+ * Updates a record's next poiter in primary file
  * @param long lastRecordPosition
  * @param long newNextValue
  *
@@ -29,4 +29,4 @@ void updatePointerInPrimaryFile(long lastRecordPosition, long newNextValue);
  * @param long firstRecordPosition
  *
  */
-void consultRecordsInPrimaryFile(long firstRecordPosition);
+void consultRecordsFromPrimaryFile(long firstRecordPosition);
