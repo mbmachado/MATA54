@@ -4,6 +4,7 @@
 #include "file.h"
 
 void insert() {
+    bool keyExists = false;
     char content[51];
     SKRecord newRecord;
     SKRecord oldRecord;
@@ -17,26 +18,30 @@ void insert() {
 
     while(fread(&oldRecord, sizeof(SKRecord), 1, multilist)) {
         if(strncmp(oldRecord.key, newRecord.key, 20) == 0 && oldRecord.isDeleted == 0) {
-            long position = insertRecord(newRecord.key, content);
-
-            // Atualizar apontador do ex-último registro em primary file //
-            updatePointer(oldRecord.lastRecord, position);
-
-            // Atualizar valor de lastRecord do registro em multilist //
-            oldRecord.lastRecord = position;
-            fseek(multilist, ftell(multilist) - sizeof(SKRecord), SEEK_SET);
-            fwrite(&oldRecord, sizeof(SKRecord), 1, multilist);
-        } else {
-            long position = insertRecord(newRecord.key, content);
-
-            newRecord.firstRecord = position;
-            newRecord.lastRecord = position;
-            newRecord.isDeleted = 0;
-
-            fseek(multilist, 0, SEEK_END);
-            fwrite(&newRecord, sizeof(SKRecord), 1, multilist);
+            keyExists = true;
+            break;
         }
-        break;
+    }
+
+    if(keyExists) {
+        long position = insertRecord(newRecord.key, content);
+
+        // Atualizar apontador do ex-último registro em primary file //
+        updatePointer(oldRecord.lastRecord, position);
+
+        // Atualizar valor de lastRecord do registro em multilist //
+        oldRecord.lastRecord = position;
+        fseek(multilist, ftell(multilist) - sizeof(SKRecord), SEEK_SET);
+        fwrite(&oldRecord, sizeof(SKRecord), 1, multilist); 
+    } else {
+        long position = insertRecord(newRecord.key, content);
+
+        newRecord.firstRecord = position;
+        newRecord.lastRecord = position;
+        newRecord.isDeleted = 0;        
+
+        fseek(multilist, 0, SEEK_END);
+        fwrite(&newRecord, sizeof(SKRecord), 1, multilist); 
     }
 
     fclose(multilist);
