@@ -5,6 +5,6 @@ faker:
 	pip install Faker
 	python3.6 input-generator.py;
 	./a.out < in
-clear:
+clean:
 	rm file.txt multilist.txt in;
 	touch file.txt multilist.txt;
