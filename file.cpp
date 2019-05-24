@@ -41,16 +41,12 @@ void consultRecords(long firstRecordPosition) {
 	file = fopen("file.txt", "rb");
 	fseek(file, firstRecordPosition, SEEK_SET);
 
-	while(true) {
+	do {
 		fread(&record, sizeof(Record), 1, file);
 		printf("%s %s\n", record.key, record.content);
 
-		if (record.next == -1) {
-			break;
-		}
-
 		fseek(file, record.next, SEEK_SET);
-	}
+	} while (record.next != -1);
 
 	fclose(file);
 }
