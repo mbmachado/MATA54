@@ -11,19 +11,19 @@ using namespace std;
  * The Record
  */
 typedef struct record {
-	char key[21];
-	char content[51];
-	long next;
+    char key[21];
+    char content[51];
+    long next;
 } Record;
 
 /**
  * The Secondary Key Record
  */
 typedef struct sk {
-	char key[21];
-	long firstRecord;
-	long lastRecord;
-	short isDeleted;
+    char key[21];
+    long firstRecord;
+    long lastRecord;
+    short isDeleted;
 } SKRecord;
 
 /**
@@ -34,20 +34,20 @@ typedef struct sk {
  *
  */
 long insertRecord(char key[21], char content[51]) {
-	long position;
-	Record record;
-	FILE *file;
+    long position;
+    Record record;
+    FILE *file;
 
-	strncpy(record.key, key, 21);
-	strncpy(record.content, content, 51);
-	record.next = -1;
+    strncpy(record.key, key, 21);
+    strncpy(record.content, content, 51);
+    record.next = -1;
 
-	file = fopen("file.txt", "a+b");
-	fwrite(&record, sizeof(Record), 1, file);
-	position = ftell(file) - sizeof(Record);
-	fclose(file);
+    file = fopen("file.txt", "a+b");
+    fwrite(&record, sizeof(Record), 1, file);
+    position = ftell(file) - sizeof(Record);
+    fclose(file);
 
-	return position;
+    return position;
 }
 
 /**
@@ -57,18 +57,18 @@ long insertRecord(char key[21], char content[51]) {
  *
  */
 void updatePointer(long lastRecordPosition, long newNextValue) {
-	FILE *file;
-	Record record;
+    FILE *file;
+    Record record;
 
-	file = fopen("file.txt", "r+b");
-	fseek(file, lastRecordPosition, SEEK_SET);
-	fread(&record, sizeof(Record), 1, file);
+    file = fopen("file.txt", "r+b");
+    fseek(file, lastRecordPosition, SEEK_SET);
+    fread(&record, sizeof(Record), 1, file);
 
-	record.next = newNextValue;
+    record.next = newNextValue;
 
-	fseek(file, lastRecordPosition, SEEK_SET);
-	fwrite(&record, sizeof(Record), 1, file);
-	fclose(file);
+    fseek(file, lastRecordPosition, SEEK_SET);
+    fwrite(&record, sizeof(Record), 1, file);
+    fclose(file);
 }
 
 /**
@@ -76,7 +76,7 @@ void updatePointer(long lastRecordPosition, long newNextValue) {
  *
  */
 void initializeDataBase(Record record) {
-	bool keyExists = false;
+    bool keyExists = false;
     char content[51];
     SKRecord newRecord;
     SKRecord oldRecord;
@@ -104,16 +104,16 @@ void initializeDataBase(Record record) {
         // Atualizar valor de lastRecord do registro em multilist //
         oldRecord.lastRecord = position;
         fseek(multilist, ftell(multilist) - sizeof(SKRecord), SEEK_SET);
-        fwrite(&oldRecord, sizeof(SKRecord), 1, multilist); 
+        fwrite(&oldRecord, sizeof(SKRecord), 1, multilist);
     } else {
         long position = insertRecord(newRecord.key, content);
 
         newRecord.firstRecord = position;
         newRecord.lastRecord = position;
-        newRecord.isDeleted = 0;        
+        newRecord.isDeleted = 0;
 
         fseek(multilist, 0, SEEK_END);
-        fwrite(&newRecord, sizeof(SKRecord), 1, multilist); 
+        fwrite(&newRecord, sizeof(SKRecord), 1, multilist);
     }
 
     fclose(multilist);
@@ -136,14 +136,14 @@ Record explode(string line) {
 }
 
 int main(int argc, char const *argv[]) {
-	ifstream file;
-	string line;
+    ifstream file;
+    string line;
 
-	file.open(FILE_NAME);
-	while(getline(file, line)) {
-		initializeDataBase(explode(line));
-	}
-	file.close();
+    file.open(FILE_NAME);
+    while(getline(file, line)) {
+        initializeDataBase(explode(line));
+    }
+    file.close();
 
-	return 0;
+    return 0;
 }
